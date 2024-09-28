@@ -1,9 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Григор Мкртчян](https://up.htmlacademy.ru/ecmascript/24/user/2552419).
-* Наставник: `
-Yulia
-Volkova`.
+* Наставник: `Yulia Volkova`.
 
 ---
 
