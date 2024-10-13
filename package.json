@@ -3,8 +3,10 @@
   "version": "22.0.0",
   "private": true,
   "description": "Проект «Большое путешествие» от HTML Academy",
-  "scripts": {
-    "lint": "eslint src/"
+    "scripts": {
+    "lint": "eslint src/",
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development --open"
   },
   "engines": {
     "node": "20"
