@@ -3,55 +3,44 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/main.js',
-  devtool: 'source-map',
+  entry: './src/main.js', // Точка входа
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.[contenthash].js',
-    clean: true,
+    filename: 'bundle.[contenthash].js', // Имя бандла
+    path: path.resolve(__dirname, 'build'), // Директория для файлов сборки
+    clean: true, // Удаляем предыдущую сборку перед созданием новой
   },
-  plugins: [
+  devtool: 'source-map', // Генерируем карту исходного кода
+  plugins: [ // Подключаем плагины
     new HtmlPlugin({
-      template: 'public/index.html'
+      template: 'public/index.html',
     }),
     new CopyPlugin({
       patterns: [
         {
           from: 'public',
           globOptions: {
-            ignore: ['**/index.html']
-          }
-        }
-      ]
-    })
+            ignore: ['**/index.html'],
+          },
+        },
+      ],
+    }),
   ],
   module: {
-    rules: [
+    rules: [ // Добавляем лоадеры
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  debug: true,
-                  useBuiltIns: 'usage',
-                  corejs: 3,
-                  loose: true
-                }
-              ]
-
-            ]
-          }
-        }
+            presets: ['@babel/preset-env']
+          },
+        },
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader']
       },
-    ]
-  }
+    ],
+  },
 };
