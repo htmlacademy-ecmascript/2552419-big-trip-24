@@ -1,35 +1,25 @@
-import { createElement } from '../render';
-import { capitalizeFirstLetter } from '../utils';
-import { FILTER_TYPES } from '../const';
+import { createElement } from '../../render.js';
+import createAllFilterTypesTemplate from './filter-view-components/filter-items-view.js';
 
-function createFilterItemTemplate(type) {
-  return(`
-    <div class="trip-filters__filter">
-      <input id="filter-${type}" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="${type}" checked>
-      <label class="trip-filters__filter-label" for="filter-${type}">${capitalizeFirstLetter(type)}</label>
-    </div>`
-  );
+const createFiltersItems = createAllFilterTypesTemplate();
+
+function createFiltersTemplate() {
+  return `<form class="trip-filters" action="#" method="get">
+                ${createFiltersItems}
+
+                <button class="visually-hidden" type="submit">Accept filter</button>
+              </form>`;
 }
 
-function createFilterTemplate() {
-  return(
-    `<form class="trip-filters" action="#" method="get">
-      ${FILTER_TYPES.map((type) => createFilterItemTemplate(type)).join('')}
-      <button class="visually-hidden" type="submit">Accept filter</button>
-    </form>`
-  );
-}
-
-export default class FilterView {
+export default class FiltersView {
   getTemplate() {
-    return createFilterTemplate();
+    return createFiltersTemplate();
   }
 
   getElement() {
     if (!this.element) {
       this.element = createElement(this.getTemplate());
     }
-
     return this.element;
   }
 
